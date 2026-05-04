@@ -1,0 +1,39 @@
+{
+  "sensorTypes": {
+    "pressure": {
+      "unit": "PSI",
+      "optimalRange": [60, 90],
+      "warningRange": [[40, 60], [90, 110]],
+      "criticalRange": [[0, 40], [110, 150]],
+      "noiseLevel": 0.025
+    },
+    "flow": {
+      "unit": "L/min",
+      "optimalRange": [100, 1000],
+      "warningRange": [[50, 100]],
+      "criticalRange": [[0, 50]],
+      "noiseLevel": 0.02
+    },
+    "pH": {
+      "unit": "pH",
+      "optimalRange": [6.5, 8.5],
+      "warningRange": [[6.0, 6.5], [8.5, 9.0]],
+      "criticalRange": [[0, 6.0], [9.0, 14.0]],
+      "noiseLevel": 0.01
+    },
+    "turbidity": {
+      "unit": "NTU",
+      "optimalRange": [0, 1.0],
+      "warningRange": [[1.0, 5.0]],
+      "criticalRange": [[5.0, 100]],
+      "noiseLevel": 0.05
+    },
+    "temperature": {
+      "unit": "°C",
+      "optimalRange": [15, 25],
+      "warningRange": [[10, 15], [25, 30]],
+      "criticalRange": [[0, 10], [30, 100]],
+      "noiseLevel": 0.01
+    }
+  }
+}

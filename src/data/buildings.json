@@ -1,0 +1,158 @@
+[
+  {
+    "id": "Z1_residential",
+    "type": "residential",
+    "name": "Downtown District",
+    "position": { "x": 600, "y": -80 },
+    "population": 25000,
+    "demandBase": 350,
+    "demandCurrent": 380,
+    "supplyCurrent": 375,
+    "connectedNode": "N3",
+    "buildings": [
+      { "type": "house", "count": 180 },
+      { "type": "apartment", "count": 45 }
+    ]
+  },
+  {
+    "id": "Z2_residential",
+    "type": "residential",
+    "name": "North Hills",
+    "position": { "x": 400, "y": -80 },
+    "population": 18000,
+    "demandBase": 280,
+    "demandCurrent": 310,
+    "supplyCurrent": 305,
+    "connectedNode": "N2",
+    "buildings": [
+      { "type": "house", "count": 240 },
+      { "type": "apartment", "count": 20 }
+    ]
+  },
+  {
+    "id": "Z3_residential",
+    "type": "residential",
+    "name": "East Side",
+    "position": { "x": 1150, "y": 250 },
+    "population": 15000,
+    "demandBase": 220,
+    "demandCurrent": 250,
+    "supplyCurrent": 245,
+    "connectedNode": "N10",
+    "buildings": [
+      { "type": "house", "count": 200 },
+      { "type": "apartment", "count": 15 }
+    ]
+  },
+  {
+    "id": "Z4_residential",
+    "type": "residential",
+    "name": "South Village",
+    "position": { "x": 600, "y": 650 },
+    "population": 12000,
+    "demandBase": 180,
+    "demandCurrent": 200,
+    "supplyCurrent": 195,
+    "connectedNode": "N18",
+    "buildings": [
+      { "type": "house", "count": 160 }
+    ]
+  },
+  {
+    "id": "Z5_residential",
+    "type": "residential",
+    "name": "West Quarter",
+    "position": { "x": 50, "y": 400 },
+    "population": 10000,
+    "demandBase": 150,
+    "demandCurrent": 170,
+    "supplyCurrent": 165,
+    "connectedNode": "N11",
+    "buildings": [
+      { "type": "house", "count": 140 }
+    ]
+  },
+  {
+    "id": "IND1",
+    "type": "industrial",
+    "name": "Manufacturing Complex",
+    "position": { "x": 50, "y": 100 },
+    "population": 500,
+    "demandBase": 800,
+    "demandCurrent": 850,
+    "supplyCurrent": 845,
+    "wastewater": {
+      "volume": 700,
+      "pollutionLevel": 75,
+      "dischargePoint": "RIVER_MIDDLE",
+      "treatment": "partial",
+      "riverConnection": { "x": 500, "y": 380 }
+    },
+    "connectedNode": "N1"
+  },
+  {
+    "id": "IND2",
+    "type": "industrial",
+    "name": "Tech Park",
+    "position": { "x": 50, "y": 250 },
+    "population": 350,
+    "demandBase": 600,
+    "demandCurrent": 640,
+    "supplyCurrent": 635,
+    "wastewater": {
+      "volume": 480,
+      "pollutionLevel": 40,
+      "dischargePoint": "RIVER_DOWNSTREAM",
+      "treatment": "advanced",
+      "riverConnection": { "x": 800, "y": 380 }
+    },
+    "connectedNode": "N6"
+  },
+  {
+    "id": "IND3",
+    "type": "industrial",
+    "name": "Chemical Plant",
+    "position": { "x": 400, "y": 650 },
+    "population": 250,
+    "demandBase": 700,
+    "demandCurrent": 740,
+    "supplyCurrent": 730,
+    "wastewater": {
+      "volume": 650,
+      "pollutionLevel": 85,
+      "dischargePoint": "RIVER_DOWNSTREAM",
+      "treatment": "partial",
+      "riverConnection": { "x": 1000, "y": 380 }
+    },
+    "connectedNode": "N17"
+  },
+  {
+    "id": "SCH1",
+    "type": "school",
+    "name": "Central Academy",
+    "position": { "x": 1150, "y": 400 },
+    "population": 3000,
+    "demandBase": 150,
+    "demandCurrent": 155,
+    "supplyCurrent": 150,
+    "waterSource": "NETWORK",
+    "waterQuality": "good",
+    "affectedBy": [],
+    "connectedNode": "N15"
+  },
+  {
+    "id": "HOSP1",
+    "type": "hospital",
+    "name": "City General Hospital",
+    "position": { "x": 1150, "y": 550 },
+    "population": 2500,
+    "demandBase": 200,
+    "demandCurrent": 210,
+    "supplyCurrent": 205,
+    "waterSource": "NETWORK",
+    "waterQuality": "good",
+    "criticalInfrastructure": true,
+    "affectedBy": [],
+    "connectedNode": "N20"
+  }
+]

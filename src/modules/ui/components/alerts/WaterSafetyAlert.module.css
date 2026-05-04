@@ -1,0 +1,35 @@
+.alert {
+  padding: 16px;
+  border-radius: 8px;
+  margin: 12px 0;
+  border-left: 4px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.content {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.message {
+  flex: 1;
+}
+
+.message p {
+  margin: 4px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.zone {
+  font-size: 12px !important;
+  margin-top: 8px !important;
+  opacity: 0.9;
+}

@@ -1,0 +1,78 @@
+.panel {
+  background: linear-gradient(135deg, #1a3a52 0%, #0f2940 100%);
+  border: 2px solid #00ccff;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+  color: #fff;
+}
+
+.title {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #00ccff;
+  letter-spacing: 0.5px;
+}
+
+.status {
+  background: rgba(0, 0, 0, 0.3);
+  border-left: 4px solid #999;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  align-items: center;
+}
+
+.row span {
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.row strong {
+  color: #00ccff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.animation {
+  margin-top: 12px;
+  height: 20px;
+  background: rgba(0, 204, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.flowBar {
+  height: 100%;
+  background: linear-gradient(90deg, #00ccff, #00ff88, #00ccff);
+  background-size: 200% 100%;
+  animation: flow 2s ease-in-out infinite;
+}
+
+@keyframes flow {
+  0%, 100% {
+    background-position: 0% 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+}
+
+.success {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: rgba(0, 204, 0, 0.2);
+  border: 1px solid #00cc00;
+  border-radius: 4px;
+  color: #00ff88;
+  font-weight: 600;
+  font-size: 13px;
+  text-align: center;
+}

@@ -1,0 +1,19 @@
+{
+  "time": {
+    "day": 1,
+    "hour": 8,
+    "minute": 0,
+    "second": 0,
+    "speed": 1,
+    "isPaused": false
+  },
+  "globalMetrics": {
+    "totalSupply": 1850,
+    "totalDemand": 1920,
+    "efficiency": 94.2,
+    "activeAlerts": 0,
+    "autoOptimizations": 0
+  },
+  "activeAnomalies": [],
+  "scenario": "Normal Operation"
+}
