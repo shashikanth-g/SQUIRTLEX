@@ -56,22 +56,9 @@ export default function Sidebar({ activePage, setActivePage, alertCount, tankerC
       </nav>
 
       <div className="sidebar-footer">
-        <div className="system-status mb-4">
+        <div className="system-status">
           <div className="status-dot online" />
           <span>Core Engine: Online</span>
-        </div>
-        
-        <div className="auth-controls mt-auto">
-          <button 
-            className="w-full flex items-center justify-center gap-2 bg-accent/10 hover:bg-accent/20 text-accent text-sm py-3 rounded-xl border border-accent/20 transition-all"
-            onClick={async () => {
-              const { logoutAdmin } = await import('../../lib/auth');
-              await logoutAdmin();
-            }}
-          >
-            <Lock size={14} />
-            <span>Terminate Session</span>
-          </button>
         </div>
       </div>
     </aside>

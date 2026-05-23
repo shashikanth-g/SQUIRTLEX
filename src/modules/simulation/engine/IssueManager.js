@@ -5,6 +5,7 @@ const savedKeys = new Set();
 let lastInsertTime = 0;
 
 async function safeInsertIssue(issue) {
+  if (!supabase) return;
   try {
     const { error } = await supabase.from("issues").insert([{
       type: issue.type,

@@ -1,4 +1,4 @@
-// App.jsx — Main application shell
+// App.jsx — Main application shell (Demo Deployment Mode)
 import React, { useState } from 'react';
 import { SimulationProvider, useSimulation } from './context/SimulationContext.jsx';
 import Sidebar from './components/layout/Sidebar.jsx';
@@ -11,10 +11,6 @@ import Alerts from './pages/Alerts.jsx';
 import Analytics from './pages/Analytics.jsx';
 import Complaints from './pages/Complaints.jsx';
 import { ToastContainer } from './components/ui/ToastNotification.jsx';
-import { Loader2 } from 'lucide-react';
-
-import Login from './pages/Login.jsx';
-import { supabase } from './lib/supabaseClient';
 
 function AppShell() {
   const [activePage, setActivePage] = useState('dashboard');
@@ -45,47 +41,30 @@ function AppShell() {
         tankerCount={tankerCount}
       />
       <div className="app-main">
+        {/* Subtle Demonstration Banner */}
+        <div className="bg-primary/10 border-b border-primary/15 text-primary/95 py-1.5 px-4 text-[11px] font-mono tracking-widest text-center shrink-0 flex items-center justify-center gap-2 select-none uppercase">
+          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#00D4FF]" />
+          <span>Authentication disabled for portfolio demonstration.</span>
+        </div>
         <TopBar />
         <main className="app-content">
           {renderPage()}
         </main>
       </div>
       <ToastContainer toasts={toasts} onDismiss={dismissToast} />
+      
+      {/* Floating Demo Mode Badge */}
+      <div className="fixed top-2.5 right-4 bg-primary/20 border border-primary/45 text-primary text-[10px] px-3 py-1 rounded-full font-mono font-bold uppercase tracking-widest shadow-[0_0_12px_rgba(0,212,255,0.3)] z-[9999] backdrop-blur-md select-none">
+        Demo Mode
+      </div>
     </div>
   );
 }
 
 export default function App() {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  React.useEffect(() => {
-    // Check current session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user || null);
-      setLoading(false);
-    });
-
-    // Listen for changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user || null);
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#0a0a0c] flex items-center justify-center">
-        <Loader2 className="text-primary animate-spin" size={48} />
-      </div>
-    );
-  }
-
   return (
     <SimulationProvider>
-      {user ? <AppShell /> : <Login />}
+      <AppShell />
     </SimulationProvider>
   );
 }

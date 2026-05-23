@@ -17,17 +17,50 @@ export default function Complaints() {
     description: ''
   });
 
-  // Part 5: Fetch complaints from Supabase
+  // Part 5: Fetch complaints from Supabase or LocalStorage fallback
   const fetchComplaints = async () => {
     setLoading(true);
     try {
-      const { data, error } = await supabase
-        .from('complaints')
-        .select('*')
-        .order('created_at', { ascending: false });
+      if (supabase) {
+        const { data, error } = await supabase
+          .from('complaints')
+          .select('*')
+          .order('created_at', { ascending: false });
 
-      if (error) throw error;
-      setComplaints(data || []);
+        if (error) throw error;
+        setComplaints(data || []);
+      } else {
+        // Fallback to localStorage seed data for demo mode
+        const local = localStorage.getItem('squirtle_complaints');
+        if (local) {
+          setComplaints(JSON.parse(local));
+        } else {
+          const defaults = [
+            {
+              id: 'comp_001',
+              user_name: 'Aditya Rao',
+              location: 'IND1',
+              issue_type: 'CONTAMINATION',
+              description: 'Slight chemical odor detected in the primary industrial outflow valve.',
+              status: 'pending',
+              ai_response: '',
+              created_at: new Date(Date.now() - 1800000).toISOString()
+            },
+            {
+              id: 'comp_002',
+              user_name: 'Rajesh Kumar',
+              location: 'RES1',
+              issue_type: 'LEAK',
+              description: 'Minor water seepage observed near main junction reservoir pipe.',
+              status: 'resolved',
+              ai_response: 'Leak detected and repair crew dispatched to the location.',
+              created_at: new Date(Date.now() - 7200000).toISOString()
+            }
+          ];
+          localStorage.setItem('squirtle_complaints', JSON.stringify(defaults));
+          setComplaints(defaults);
+        }
+      }
     } catch (err) {
       console.warn('[COMPLAINTS]', err.message);
     } finally {
@@ -38,6 +71,8 @@ export default function Complaints() {
   // Part 10: Real-time subscription to complaints
   useEffect(() => {
     fetchComplaints();
+
+    if (!supabase) return;
 
     const channel = supabase
       .channel('complaints_updates')
@@ -98,16 +133,33 @@ export default function Complaints() {
   // Part 8: Update complaint status
   const updateComplaintStatus = async (complaintId, status, aiResponse = '') => {
     try {
-      const { error } = await supabase
-        .from('complaints')
-        .update({
-          status,
-          ai_response: aiResponse || undefined
-        })
-        .eq('id', complaintId);
+      if (supabase) {
+        const { error } = await supabase
+          .from('complaints')
+          .update({
+            status,
+            ai_response: aiResponse || undefined
+          })
+          .eq('id', complaintId);
 
-      if (error) throw error;
-      fetchComplaints();
+        if (error) throw error;
+        fetchComplaints();
+      } else {
+        const local = localStorage.getItem('squirtle_complaints');
+        const list = local ? JSON.parse(local) : [];
+        const updated = list.map(c => {
+          if (c.id === complaintId) {
+            return {
+              ...c,
+              status,
+              ai_response: aiResponse !== undefined ? (aiResponse || c.ai_response) : c.ai_response
+            };
+          }
+          return c;
+        });
+        localStorage.setItem('squirtle_complaints', JSON.stringify(updated));
+        setComplaints(updated);
+      }
 
       // Part 12: Auto-resolve after 5 seconds (simulate fix completion)
       if (status === 'in_progress') {
@@ -123,22 +175,35 @@ export default function Complaints() {
   // Part 11: Handle form submission
   const handleSubmitComplaint = async (e) => {
     e.preventDefault();
-    try {
-      const { error } = await supabase
-        .from('complaints')
-        .insert([{
-          user_name: formData.user_name,
-          location: formData.location,
-          issue_type: formData.issue_type,
-          description: formData.description,
-          status: 'pending'
-        }]);
+    const newComp = {
+      id: `comp_${Date.now()}`,
+      user_name: formData.user_name,
+      location: formData.location,
+      issue_type: formData.issue_type,
+      description: formData.description,
+      status: 'pending',
+      ai_response: '',
+      created_at: new Date().toISOString()
+    };
 
-      if (error) throw error;
+    try {
+      if (supabase) {
+        const { error } = await supabase
+          .from('complaints')
+          .insert([newComp]);
+
+        if (error) throw error;
+        fetchComplaints();
+      } else {
+        const local = localStorage.getItem('squirtle_complaints');
+        const list = local ? JSON.parse(local) : [];
+        const updated = [newComp, ...list];
+        localStorage.setItem('squirtle_complaints', JSON.stringify(updated));
+        setComplaints(updated);
+      }
 
       setFormData({ user_name: '', location: '', issue_type: 'LEAK', description: '' });
       setShowForm(false);
-      fetchComplaints();
     } catch (err) {
       console.warn('[SUBMIT COMPLAINT]', err.message);
     }
